@@ -9,34 +9,37 @@ export default function Chart() {
     const radius = height / 2 - strokeWidth / 2;
     const eyeOffsetX = 50;
     const eyeOffsetY = 50;
+    const eyeRadius = 25;
+    const mouthArc = d3.arc()
+        .innerRadius(90)
+        .outerRadius(100)
+        .startAngle(2)
+        .endAngle(4.2);
+
     return (
         <>
             <svg width="300" height="300">
-                <circle
-                    cx={centerX}
-                    cy={centerY}
-                    r={radius}
-                    fill="yellow"
-                    stroke="black"
-                    strokeWidth={10}
-                >
-                </circle>
-                <circle
-                    cx={centerX - eyeOffsetX}
-                    cy={centerY - eyeOffsetY}
-                    r="25"
-                    strokeWidth={10}
-                >
-
-                </circle>
-                <circle
-                    cx={centerX + eyeOffsetX}
-                    cy={centerY - eyeOffsetY}
-                    r="25"
-                    strokeWidth={10}
-                >
-
-                </circle>
+                <g transform={`translate(${centerX},${centerY})`}>
+                    <circle
+                        r={radius}
+                        fill="yellow"
+                        stroke="black"
+                        strokeWidth={10}
+                    />
+                    <circle
+                        cx={- eyeOffsetX}
+                        cy={- eyeOffsetY}
+                        r={eyeRadius}
+                        strokeWidth={10}
+                    />
+                    <circle
+                        cx={eyeOffsetX}
+                        cy={-eyeOffsetY}
+                        r={eyeRadius}
+                        strokeWidth={10}
+                    />
+                    <path d={mouthArc()} />
+                </g>
             </svg>
         </>
     )
