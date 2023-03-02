@@ -34,16 +34,18 @@ export default function AddTodo() {
 
     if (page === 1) {
         return (
-            <div className="flex flex-col items-center justify-center gap-10 p-10 bg-slate-600">
+            <div className="flex flex-col items-center justify-center gap-5 p-10 rounded-lg bg-slate-600">
                 <div className="text-lg font-semibold">Enter Todo Image</div>
-                <div className="flex flex-col justify-center gap-2 p-5 rounded-lg bg-slate-700 w-fit">
-                    <div className="text-sm">Preview</div>
-                    <img src={imageURL} alt={""} width={80} height={80} />
+                <div className="flex flex-col items-center gap-2">
+                    <div className="text-sm">Image Preview</div>
+                    <div className="p-5 bg-slate-700 w-fit">
+                        <img src={imageURL} alt={""} width={80} height={80} />
+                    </div>
                 </div>
                 <div className="flex flex-col gap-2">
                     <div className="text-xs ">Enter Image URL: </div>
                     <div className="flex flex-row items-center gap-2 text-sm">
-                        <input className="p-2 bg-slate-500" type={"text"} onChange={((e) => e.target.value && imageValidation(e))} />
+                        <input className="p-2 bg-slate-500" type={"text"} placeholder={"Leave blank for default"} onChange={((e) => e.target.value && imageValidation(e))} />
                         <button className="px-3 py-2 bg-slate-500">Next</button>
                     </div>
                 </div>
