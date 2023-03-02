@@ -11,8 +11,13 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateRows: {
-        'layout': '1fr 2fr 2fr'
+        'layout': '1fr 2fr 2fr',
+        'todoLayout': '1fr 1fr'
+      },
+      gridTemplateColumns: {
+        'todoLayout': '40% auto'
       }
+
     },
   },
   plugins: [],
