@@ -11,9 +11,8 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateRows: {
-        // Simple 8 row grid
-        '10': 'repeat(10, minmax(0, 1fr))',
-      },
+        'layout': '1fr 2fr 2fr'
+      }
     },
   },
   plugins: [],
