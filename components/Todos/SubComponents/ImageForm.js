@@ -30,7 +30,7 @@ export default function ImageForm({ page, setPage }) {
 
     return (
         <div className="flex flex-col items-center justify-center gap-5 p-10 rounded-lg bg-slate-600">
-            <div className="text-lg font-semibold">Enter Todo Image</div>
+            <div className="text-lg font-semibold">Step 1: Enter Todo Image</div>
             <div className="flex flex-col items-center gap-2">
                 <div className="text-sm">Image Preview</div>
                 <div className="p-5 bg-slate-700 w-fit">
