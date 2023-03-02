@@ -16,7 +16,7 @@ export default function TitleForm({ page, setPage }) {
                     <textarea id="notes" className="flex-grow w-full p-2 resize-none bg-slate-500" />
                 </div>
             </div>
-            <button className="self-center px-3 py-2 text-center bg-slate-500">Add</button>
+            <button className="self-center w-1/2 px-3 py-2 text-center bg-slate-500">Add</button>
         </div>
     )
 }
