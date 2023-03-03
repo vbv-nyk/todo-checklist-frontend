@@ -2,7 +2,7 @@ import { json } from "d3";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-export default function TitleForm({ page, setPage, imageURL }) {
+export default function TitleForm({ imageURL, setShowAddTodo }) {
     const URL = "http://192.168.103:3000";
     const titleRef = useRef(null);
     const linkRef = useRef(null);
@@ -84,7 +84,10 @@ export default function TitleForm({ page, setPage, imageURL }) {
                     </div>
                 </div>
             </div>
-            <button className="self-center w-1/2 px-3 py-2 text-center bg-slate-500" onClick={() => AddTodo()}>Add</button>
+            <button className="self-center w-1/2 px-3 py-2 text-center bg-slate-500" onClick={() => {
+                AddTodo();
+                setShowAddTodo(false);
+            }}>Add</button>
         </form >
     )
 }

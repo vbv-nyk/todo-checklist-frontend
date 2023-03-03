@@ -27,7 +27,7 @@ export default function TodosContainer() {
     return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl">
         <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo} />
         <div className="flex flex-col gap-2">
-            {showAddTodo && (<AddTodo />)}
+            {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} />)}
             <>
                 {Todos}
             </>
