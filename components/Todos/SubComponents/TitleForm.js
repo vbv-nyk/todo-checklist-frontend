@@ -1,7 +1,9 @@
+import { json } from "d3";
 import Image from "next/image";
 import { useRef } from "react";
 
 export default function TitleForm({ page, setPage, imageURL }) {
+    const URL = "http://192.168.103:3001";
     const titleRef = useRef(null);
     const linkRef = useRef(null);
     const noteRef = useRef(null);
@@ -10,11 +12,13 @@ export default function TitleForm({ page, setPage, imageURL }) {
         border: "solid 1px transparent"
     }
 
-    function AddTodo() {
+    async function AddTodo() {
         const title = titleRef.current.value;
         const link = linkRef.current.value;
         const note = noteRef.current.value;
-        console.log(titleRef, linkRef, noteRef)
+
+        console.log(title, link, note);
+
         if (!title) {
             titleRef.current.style.border = "solid 1px red"
             return;
@@ -23,7 +27,19 @@ export default function TitleForm({ page, setPage, imageURL }) {
             noteRef.current.style.border = "solid 1px red"
             return;
         }
+
+        const res = await fetch(`${URL}/Todos/`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: (JSON.stringify({
+                title, link, note, iconURL: imageURL
+            }))
+        });
+        console.log(res.json());
     }
+
     return (
         <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 w-fit ">
             <div>
@@ -41,12 +57,12 @@ export default function TitleForm({ page, setPage, imageURL }) {
 
                     </div>
                     <div className="flex flex-col col-start-1 col-end-2 gap-1">
-                        <label for="link" className="text-xs">Link To Website</label>
+                        <label htmlFor="link" className="text-xs">Link To Website</label>
                         <input onFocus={(e) => e.target
                             .style = noError.border} style={noError} id="link" ref={linkRef} className="p-2 bg-slate-500" />
                     </div>
                     <div className="flex flex-col gap-1">
-                        <label for="notes" className="text-xs">Add Notes *</label>
+                        <label htmlFor="notes" className="text-xs">Add Notes *</label>
                         <textarea onFocus={(e) => e.target
                             .style = noError.border} style={noError} id="notes" ref={noteRef} className="flex-grow w-full p-2 resize-none bg-slate-500" />
                     </div>
