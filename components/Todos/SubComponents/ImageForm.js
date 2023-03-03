@@ -20,11 +20,11 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 w-fit">
+        <div className="flex flex-col items-center justify-center gap-5 p-4 mx-auto text-sm rounded-lg bg-slate-800 w-fit">
             <div className="text-lg font-semibold">Step 1: Enter Todo Image</div>
             <div className="flex flex-col items-center gap-2">
                 <div className="text-sm">Image Preview</div>
-                <div className="p-5 bg-slate-700 w-fit">
+                <div className="w-auto h-auto p-5 bg-slate-700 ">
                     <img src={imageURL} alt={""} width={80} height={80} />
                 </div>
             </div>

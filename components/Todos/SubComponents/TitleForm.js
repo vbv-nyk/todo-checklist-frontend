@@ -59,13 +59,15 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
     }
 
     return (
-        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 w-fit ">
+        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center justify-center gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 w-fit ">
             <div>
                 <div className="text-lg font-bold text-center">Step 2: Enter Todo Details</div>
                 <div className="text-xs"><i>Fields marked with * are mandatory</i></div>
             </div>
-            <div className="flex flex-row gap-2">
-                <Image className="max-sm:hidden" src={"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/GNOME_Todo_icon_2019.svg/1200px-GNOME_Todo_icon_2019.svg.png"} alt="" width={220} height={200} />
+            <div className="flex flex-row items-center gap-2 center">
+                <div>
+                    <Image className="max-sm:hidden" src={"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/GNOME_Todo_icon_2019.svg/1200px-GNOME_Todo_icon_2019.svg.png"} alt="" width={220} height={200} />
+                </div>
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col col-start-1 col-end-2 gap-1">
                         <label htmlFor="title" className="text-xs">Title For Todo *</label>
