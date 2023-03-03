@@ -7,13 +7,14 @@ import TitleForm from "./SubComponents/TitleForm";
 
 export default function AddTodo() {
     const [page, setPage] = useState(1);
+    const [imageURL, setImageURL] = useState("https://cdn.iconscout.com/icon/premium/png-512-thumb/todo-list-1540192-1305387.png?f=avif&w=256");
 
     if (page === 1) {
-        return <ImageForm page={page} setPage={setPage} />
+        return <ImageForm imageURL={imageURL} setImageURL={setImageURL} setPage={setPage} />
     }
 
     if (page === 2) {
-        return <TitleForm page={page} setPage={setPage} />
+        return <TitleForm imageURL={imageURL} page={page} setPage={setPage} />
 
     }
 }

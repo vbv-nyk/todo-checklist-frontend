@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-export default function ImageForm({ page, setPage }) {
-    const [imageURL, setImageURL] = useState("https://cdn.iconscout.com/icon/premium/png-512-thumb/todo-list-1540192-1305387.png?f=avif&w=256");
+export default function ImageForm({ imageURL, setImageURL, setPage }) {
 
 
     function checkIfImageExists(url, callback) {
@@ -29,7 +28,7 @@ export default function ImageForm({ page, setPage }) {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center gap-5 p-10 text-sm rounded-lg bg-slate-600">
+        <div className="flex flex-col items-center justify-center gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 w-fit">
             <div className="text-lg font-semibold">Step 1: Enter Todo Image</div>
             <div className="flex flex-col items-center gap-2">
                 <div className="text-sm">Image Preview</div>
