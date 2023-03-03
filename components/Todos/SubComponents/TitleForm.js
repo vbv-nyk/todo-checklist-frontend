@@ -1,17 +1,24 @@
 import { json } from "d3";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function TitleForm({ page, setPage, imageURL }) {
     const URL = "http://192.168.103:3000";
     const titleRef = useRef(null);
     const linkRef = useRef(null);
     const noteRef = useRef(null);
+    const [invalidLink, setInvalidLink] = useState(false);
 
     const noError = {
         border: "solid 1px transparent"
     }
-
+    function validateURL(url) {
+        if (/^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/g.test(url)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     async function AddTodo() {
         const title = titleRef.current.value;
         const link = linkRef.current.value;
@@ -23,6 +30,12 @@ export default function TitleForm({ page, setPage, imageURL }) {
             titleRef.current.style.border = "solid 1px red"
             return;
         }
+        if (link && !validateURL(link)) {
+            linkRef.current.style.border = "solid 1px red";
+            setInvalidLink(true);
+            return;
+        }
+        setInvalidLink(false);
         if (!note) {
             noteRef.current.style.border = "solid 1px red"
             return;
@@ -57,9 +70,12 @@ export default function TitleForm({ page, setPage, imageURL }) {
 
                     </div>
                     <div className="flex flex-col col-start-1 col-end-2 gap-1">
-                        <label htmlFor="link" className="text-xs">Link To Website</label>
-                        <input onFocus={(e) => e.target
-                            .style = noError.border} style={noError} id="link" ref={linkRef} className="p-2 bg-slate-500" />
+                        <label htmlFor="link" className="text-xs">Link To Website {invalidLink && <span className="p-2 text-red-400"> (Invalid URL)</span>}</label>
+                        <input onFocus={(e) => {
+                            e.target.style = noError.border
+                            setInvalidLink(false);
+                        }}
+                            style={noError} id="link" ref={linkRef} className="p-2 bg-slate-500" />
                     </div>
                     <div className="flex flex-col gap-1">
                         <label htmlFor="notes" className="text-xs">Add Notes *</label>

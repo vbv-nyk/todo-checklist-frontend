@@ -24,7 +24,7 @@ export default function TodosContainer() {
     const Todos = todosData.map((todo) => {
         return <Todo key={todo._id} id={todo._id} title={todo.title} note={todo.note} iconURL={todo.iconURL} link={todo.link} />
     })
-    return (<div className="flex flex-col gap-1 p-6 bg-slate-700">
+    return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl">
         <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo} />
         <div className="flex flex-col gap-2">
             {showAddTodo && (<AddTodo />)}

@@ -5,7 +5,7 @@ import TodosContainer from "../../components/Todos/TodosContainer";
 
 export default function Home() {
   return (
-    <div>
+    <div >
       <Navbar />
       <Chart />
       <TodosContainer />
