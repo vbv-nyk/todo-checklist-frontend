@@ -28,13 +28,13 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
                     <img src={imageURL} alt={""} width={80} height={80} />
                 </div>
             </div>
-            <div className="flex flex-col gap-2">
+            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
                 <div className="text-xs ">Enter Image URL: </div>
                 <div className="flex flex-row items-center gap-2 text-sm">
                     <input className="p-2 bg-slate-500" type={"text"} placeholder={"Leave blank for default"} onChange={((e) => e.target.value && checkIfImageExists(e.target.value))} />
                     <button className="px-3 py-2 bg-slate-500" onClick={() => setPage(n => n + 1)}>Next</button>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

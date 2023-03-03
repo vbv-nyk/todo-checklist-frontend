@@ -13,7 +13,8 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
         border: "solid 1px transparent"
     }
     function validateURL(url) {
-        if (/^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/g.test(url)) {
+
+        if (/^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/gm.test(url)) {
             return true;
         } else {
             return false;
@@ -24,21 +25,24 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
         const link = linkRef.current.value;
         const note = noteRef.current.value;
 
-        console.log(title, link, note);
 
         if (!title) {
             titleRef.current.style.border = "solid 1px red"
-            return;
+            return false;
         }
+
+        console.log(title, link, note);
         if (link && !validateURL(link)) {
+            console.log(validateURL(link));
             linkRef.current.style.border = "solid 1px red";
             setInvalidLink(true);
-            return;
+            return false;
         }
-        setInvalidLink(false);
+        console.log(title, link, note);
+
         if (!note) {
             noteRef.current.style.border = "solid 1px red"
-            return;
+            return false;
         }
 
         const res = await fetch(`${URL}/Todos/`, {
@@ -51,6 +55,7 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
             }))
         });
         console.log(res.json());
+        return true;
     }
 
     return (
@@ -84,9 +89,11 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
                     </div>
                 </div>
             </div>
-            <button className="self-center w-1/2 px-3 py-2 text-center bg-slate-500" onClick={() => {
-                AddTodo();
-                setShowAddTodo(false);
+            <button className="self-center w-1/2 px-3 py-2 text-center bg-slate-500" onClick={async () => {
+                const success = await AddTodo();
+                if (success) {
+                    setShowAddTodo(false);
+                }
             }}>Add</button>
         </form >
     )
