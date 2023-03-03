@@ -3,7 +3,6 @@ import checkIfImageExists from "../../../HelperFunctions/CheckImage";
 
 export default function ImageForm({ imageURL, setImageURL, setPage }) {
 
-
     return (
         <div className="flex flex-col items-center justify-center gap-5 p-4 mx-auto text-sm rounded-lg bg-slate-800 w-fit">
             <div className="text-lg font-semibold">Step 1: Enter Todo Image</div>

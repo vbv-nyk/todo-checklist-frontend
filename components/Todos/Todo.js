@@ -1,12 +1,34 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ImageForm from "./SubComponents/ImageForm";
 import TodoOptions from "./SubComponents/TodoOptions";
 
 export default function Todo({ title, note, link, iconURL, id }) {
+    const URL = "http://192.168.0.103:3000"
     const [editing, setEditing] = useState(false);
+    const titleRef = useRef(null);
+    const noteRef = useRef(null);
+
+    async function updateTodo() {
+        const title = titleRef.current.value;
+        const note = noteRef.current.value;
+
+        const data = await fetch(`${URL}/Todos/${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                title, note
+            })
+        });
+
+        setEditing(false);
+        console.log(data);
+    }
 
     if (editing) {
+
         return (
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col justify-center gap-2 p-5 rounded-xl bg-slate-800">
                 <div>
@@ -15,15 +37,15 @@ export default function Todo({ title, note, link, iconURL, id }) {
                             <Image src={iconURL} alt={"Image Url"} height={5} width={20} />
                         </div>
                         <div>
-                            <input className="p-1 text-sm font-semi w-fit bold w-min-fit bg-slate-600" value={title} />
+                            <input className="p-1 text-sm font-semi w-fit bold w-min-fit bg-slate-600" ref={titleRef} defaultValue={title} />
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                    <input className="w-full p-2 text-sm break-all bg-slate-600" value={note} />
+                    <input className="w-full p-2 text-sm break-all bg-slate-600" ref={noteRef} defaultValue={note} />
                     <div className="flex gap-2">
-                        <button className="px-3 py-2 text-sm bg-green-600">Save</button>
-                        <button className="px-3 py-2 text-sm bg-red-600">Cancel</button>
+                        <button className="px-3 py-2 text-sm bg-green-600" onClick={() => updateTodo()}>Save</button>
+                        <button className="px-3 py-2 text-sm bg-red-600" onClick={() => setEditing(false)}>Cancel</button>
                     </div>
                 </div>
             </form>
