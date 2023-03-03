@@ -1,23 +1,8 @@
 import { useState } from "react";
+import checkIfImageExists from "../../../HelperFunctions/CheckImage";
 
 export default function ImageForm({ imageURL, setImageURL, setPage }) {
 
-
-    function checkIfImageExists(url) {
-        const img = new Image();
-        img.src = url;
-
-        if (img.complete) {
-            setImageURL(url);
-        } else {
-            img.onload = () => {
-                setImageURL(url);
-            };
-            img.onerror = () => {
-                setImageURL("https://cdn.iconscout.com/icon/premium/png-512-thumb/todo-list-1540192-1305387.png?f=avif&w=256");
-            };
-        }
-    }
 
     return (
         <div className="flex flex-col items-center justify-center gap-5 p-4 mx-auto text-sm rounded-lg bg-slate-800 w-fit">
