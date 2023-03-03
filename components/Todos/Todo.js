@@ -8,4 +8,4 @@ export default function Todo({ title, note, link, iconURL, start, end }) {
         </div>
         <div className="break-all">{note}</div>
     </div>)
-}
+} 

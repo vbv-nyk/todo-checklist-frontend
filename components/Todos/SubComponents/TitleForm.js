@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRef } from "react";
 
 export default function TitleForm({ page, setPage, imageURL }) {
-    const URL = "http://192.168.103:3001";
+    const URL = "http://192.168.103:3000";
     const titleRef = useRef(null);
     const linkRef = useRef(null);
     const noteRef = useRef(null);
@@ -50,7 +50,7 @@ export default function TitleForm({ page, setPage, imageURL }) {
                 <Image className="max-sm:hidden" src={"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/GNOME_Todo_icon_2019.svg/1200px-GNOME_Todo_icon_2019.svg.png"} alt="" width={220} height={200} />
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col col-start-1 col-end-2 gap-1">
-                        <label for="title" className="text-xs">Title For Todo *</label>
+                        <label htmlFor="title" className="text-xs">Title For Todo *</label>
                         <input onFocus={(e) => e.target
                             .style = noError.border} style={noError} id="title" ref={titleRef} className="p-2 bg-slate-500" />
                         {/* <div>This is a required field</div> */}
