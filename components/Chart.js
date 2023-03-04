@@ -1,18 +1,32 @@
-import * as d3 from "d3";
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useEffect } from 'react';
+import * as d3 from 'd3';
 
-export default function Chart() {
-    const svgRef = useRef(null);
+function TodoHeatmap({ data }) {
+    const date = new Date();
+    const month = date.getMonth() + 1;
 
-    useEffect(() => {
+    function getNoOfDays() {
+        //December or January
+        if (month === 12 || month === 1) {
+            return 31;
+        }
 
+        //Febuary
+        if (month === 2) { return 28; }
 
-    }, [svgRef])
+        //Other months, 31 days if even else 30 days
+        if (month % 2) {
+            return 31;
+        } else {
+            return 30;
+        }
+    }
 
+    console.log(getNoOfDays());
     return (
-        <div className="row-start-1 row-end-2">
-            <svg ref={svgRef} id="heatmap" >
-
-            </svg >
-        </div>);
+        <svg height={200} className="w-full px-6">
+        </svg >
+    )
 }
+
+export default TodoHeatmap;

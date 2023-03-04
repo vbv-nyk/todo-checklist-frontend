@@ -1,3 +1,4 @@
+import TodoHeatmap from "../../components/Chart";
 import Chart from "../../components/Chart";
 import Navbar from "../../components/Navbar";
 import Todo from "../../components/Todos/Todo";
@@ -7,7 +8,7 @@ export default function Home() {
   return (
     <div >
       <Navbar />
-      <Chart />
+      <TodoHeatmap />
       <TodosContainer />
     </div>
   )
