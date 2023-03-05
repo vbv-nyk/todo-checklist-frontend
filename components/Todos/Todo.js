@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
+import checkIfImageExists from "../../HelperFunctions/CheckImage";
 import ImageForm from "./SubComponents/ImageForm";
 import { validateURL } from "./SubComponents/TitleForm";
 import TodoOptions from "./SubComponents/TodoOptions";
@@ -9,6 +10,8 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
     const [iconForm, setIconForm] = useState(false);
     const [editing, setEditing] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
+    const [imageExists, setImageExists] = useState(true);
+    const [imageSrc, setImageSrc] = useState(iconURL);
 
     const titleRef = useRef(null);
     const noteRef = useRef(null);
@@ -30,6 +33,21 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
             setInvalidLink(true);
             return false;
         }
+
+        console.log(imageSrc);
+
+        const data = await fetch(`${URL}/Todos/${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                link, iconURL: imageSrc
+            })
+        });
+
+        setEditing(false);
+        console.log(data);
     }
 
     async function updateTodo() {
@@ -52,15 +70,26 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
 
     if (editing) {
         if (iconForm)
-            return (<form onSubmit={(e) => e.preventDefault()} className="relative flex flex-col w-full gap-2 p-4 -mb-8 text-sm h-fit bg-slate-800 bottom-5">
+            return (<form onSubmit={(e) => e.preventDefault()} className="flex flex-col w-full gap-2 p-4 text-sm rounded-2xl h-fit bg-slate-800 bottom-5">
+                <Image src={imageSrc} alt={"Image Url"} height={5} width={20} className="h-5 hover:cursor-pointer " onClick={() => setIconForm(n => !n)} />
+
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-col">
-                        <label>Icon URL </label>
+                        <label>Icon URL {!imageExists && <span className="p-2 italic text-red-400">(Image does not exist)</span>}</label>
                     </div>
-                    <input ref={iconRef} defaultValue={iconURL} className="w-full p-1 bg-slate-600" />
+                    <input ref={iconRef} onChange={(e) => {
+                        if (checkIfImageExists(e.target.value)) {
+                            setImageSrc(e.target.value)
+                            setImageExists(true);
+                        } else {
+                            setImageSrc(iconURL);
+                            setImageExists(false);
+                        }
+                    }
+                    } defaultValue={iconURL} className="w-full p-1 bg-slate-600" />
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label>External website URL {invalidLink && <span className="p-2 text-red-400"> (Invalid URL)</span>}</label>
+                    <label>External website URL {invalidLink && <span className="p-2 italic text-red-400"> (Invalid URL)</span>}</label>
                     <input defaultValue={link}
                         ref={linkRef} onFocus={(e) => {
                             setInvalidLink(false)
@@ -83,16 +112,16 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
                                 <Image src={iconURL} alt={"Image Url"} height={5} width={20} className="h-5 hover:cursor-pointer " onClick={() => setIconForm(n => !n)} />
                             </div>
                         </div>
-                        {!iconForm && <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-1">
                             <input className="p-1 text-sm font-semi w-fit bold w-min-fit bg-slate-600" ref={titleRef} defaultValue={title} />
-                        </div>}
+                        </div>
                     </div>
                 </div>
-                {!iconForm && <div className="flex flex-wrap gap-2 md:flex-nowrap">
+                <div className="flex flex-wrap gap-2 md:flex-nowrap">
                     <input className="w-full p-1 text-sm break-all bg-slate-600" ref={noteRef} defaultValue={note} />
                     <button className="px-3 py-2 text-sm bg-green-600" onClick={() => updateTodo()}>Save</button>
                     <button className="px-3 py-2 text-sm bg-red-600" onClick={() => setEditing(false)}>Cancel</button>
-                </div>}
+                </div>
             </form>
         )
 
