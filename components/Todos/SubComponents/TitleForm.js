@@ -11,7 +11,7 @@ export function validateURL(url) {
     }
 }
 
-export default function TitleForm({ imageURL, setShowAddTodo }) {
+export default function TitleForm({ imageURL, setShowAddTodo, todosData, setTodosData }) {
     const URL = "http://192.168.103:3000";
     const titleRef = useRef(null);
     const linkRef = useRef(null);
@@ -56,7 +56,11 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
                 title, link, note, iconURL: imageURL
             }))
         });
-        console.log(res.json());
+
+        const todos = await (await fetch(`${URL}/Todos`)).json();
+        console.log(todos);
+        setTodosData(todos);
+
         return true;
     }
 

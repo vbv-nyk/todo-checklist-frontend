@@ -5,7 +5,8 @@ import TitleForm from "./SubComponents/TitleForm";
 
 
 
-export default function AddTodo({ setShowAddTodo }) {
+export default function AddTodo({ setShowAddTodo, setTodosData,
+    todosData }) {
     const [page, setPage] = useState(1);
     const [imageURL, setImageURL] = useState("https://cdn.iconscout.com/icon/premium/png-512-thumb/todo-list-1540192-1305387.png?f=avif&w=256");
 
@@ -14,7 +15,7 @@ export default function AddTodo({ setShowAddTodo }) {
     }
 
     if (page === 2) {
-        return <TitleForm imageURL={imageURL} setShowAddTodo={setShowAddTodo} />
+        return <TitleForm imageURL={imageURL} todosData={todosData} setTodosData={setTodosData} setShowAddTodo={setShowAddTodo} />
 
     }
 }

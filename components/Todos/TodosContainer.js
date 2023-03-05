@@ -33,6 +33,8 @@ export default function TodosContainer() {
                     iconURL={todo.iconURL}
                     link={todo.link}
                     done={todo.done}
+                    todosData={todosData}
+                    setTodosData={setTodosData}
                 />
             );
         });
@@ -45,7 +47,8 @@ export default function TodosContainer() {
             setTodosData={setTodosData}
             todosData={todosData} />
         <div className="flex flex-col gap-2">
-            {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} />)}
+            {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} setTodosData={setTodosData}
+                todosData={todosData} />)}
             <>
                 {Todos}
             </>

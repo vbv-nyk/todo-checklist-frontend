@@ -6,7 +6,7 @@ import { validateURL } from "./SubComponents/TitleForm";
 import Draggable, { DraggableCore } from 'react-draggable'; // Both at the same time
 import TodoOptions from "./SubComponents/TodoOptions";
 
-export default function Todo({ title, note, link, iconURL, id, done }) {
+export default function Todo({ title, note, link, iconURL, id, done, todosData, setTodosData }) {
     const URL = "http://192.168.0.103:3000"
     const [iconForm, setIconForm] = useState(false);
     const [editing, setEditing] = useState(false);
@@ -135,7 +135,7 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
                     {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
                 </div>
                 {!done && <div>
-                    <TodoOptions id={id} setEditing={setEditing} />
+                    <TodoOptions id={id} setEditing={setEditing} todosData={todosData} setTodosData={setTodosData} />
 
                 </div>}
                 {done && <div className="text-green-400">Done</div>}
