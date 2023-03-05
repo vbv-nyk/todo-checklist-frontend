@@ -2,6 +2,15 @@ import { json } from "d3";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
+export function validateURL(url) {
+
+    if (/^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/gm.test(url)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 export default function TitleForm({ imageURL, setShowAddTodo }) {
     const URL = "http://192.168.103:3000";
     const titleRef = useRef(null);
@@ -12,14 +21,7 @@ export default function TitleForm({ imageURL, setShowAddTodo }) {
     const noError = {
         border: "solid 1px transparent"
     }
-    function validateURL(url) {
 
-        if (/^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?\/?$/gm.test(url)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     async function AddTodo() {
         const title = titleRef.current.value;
         const link = linkRef.current.value;

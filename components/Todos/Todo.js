@@ -1,17 +1,36 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import ImageForm from "./SubComponents/ImageForm";
+import { validateURL } from "./SubComponents/TitleForm";
 import TodoOptions from "./SubComponents/TodoOptions";
 
 export default function Todo({ title, note, link, iconURL, id, done }) {
     const URL = "http://192.168.0.103:3000"
     const [iconForm, setIconForm] = useState(false);
     const [editing, setEditing] = useState(false);
+    const [invalidLink, setInvalidLink] = useState(false);
+
     const titleRef = useRef(null);
     const noteRef = useRef(null);
+    const iconRef = useRef(null);
+    const linkRef = useRef(null);
+
+    const noError = {
+        border: "solid 1px transparent"
+    }
 
     let titleMarkup = title;
     let noteMarkup = note;
+
+
+    async function updateLinks() {
+        const link = linkRef.current.value;
+        if (link && !validateURL(link)) {
+            linkRef.current.style.border = "solid 1px red";
+            setInvalidLink(true);
+            return false;
+        }
+    }
 
     async function updateTodo() {
         const title = titleRef.current.value;
@@ -32,6 +51,29 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
     }
 
     if (editing) {
+        if (iconForm)
+            return (<form onSubmit={(e) => e.preventDefault()} className="relative flex flex-col w-full gap-2 p-4 -mb-8 text-sm h-fit bg-slate-800 bottom-5">
+                <div className="flex flex-col gap-1">
+                    <div className="flex flex-col">
+                        <label>Icon URL </label>
+                    </div>
+                    <input ref={iconRef} defaultValue={iconURL} className="w-full p-1 bg-slate-600" />
+                </div>
+                <div className="flex flex-col gap-1">
+                    <label>External website URL {invalidLink && <span className="p-2 text-red-400"> (Invalid URL)</span>}</label>
+                    <input defaultValue={link}
+                        ref={linkRef} onFocus={(e) => {
+                            setInvalidLink(false)
+                            e.target.style = noError.border
+                        }} className="w-full p-1 bg-slate-500"
+                        placeholder="" />
+                </div>
+                <div className="flex flex-row gap-2">
+                    <button type="submit" className="px-3 py-2 bg-green-600" onClick={() => updateLinks()}>Save</button>
+                    <button className="px-3 py-2 bg-red-600" onClick={() => setIconForm(false)} >Cancel</button>
+                </div>
+            </form>)
+
         return (
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col justify-center gap-2 p-5 rounded-xl bg-slate-800">
                 <div>
@@ -39,20 +81,6 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
                         <div className="w-full h-full">
                             <div className="flex flex-row">
                                 <Image src={iconURL} alt={"Image Url"} height={5} width={20} className="h-5 hover:cursor-pointer " onClick={() => setIconForm(n => !n)} />
-                                {iconForm && <form onSubmit={(e) => e.preventDefault()} className="relative flex flex-col w-full gap-2 p-4 -mb-8 text-sm h-fit bg-slate-800 bottom-5">
-                                    <div className="flex flex-col gap-1">
-                                        <label>Icon URL</label>
-                                        <input defaultValue={iconURL} className="w-full p-1 bg-slate-600" />
-                                    </div>
-                                    <div className="flex flex-col gap-1">
-                                        <label>External website URL</label>
-                                        <input defaultValue={link} className="w-full p-1 bg-slate-500" />
-                                    </div>
-                                    <div className="flex flex-row gap-2">
-                                        <button type="submit" className="px-3 py-2 bg-green-600">Save</button>
-                                        <button className="px-3 py-2 bg-red-600" onClick={() => setIconForm(false)} >Cancel</button>
-                                    </div>
-                                </form>}
                             </div>
                         </div>
                         {!iconForm && <div className="flex flex-col gap-1">
@@ -67,9 +95,8 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
                 </div>}
             </form>
         )
+
     }
-
-
     return (<div className="flex flex-col items-start justify-start gap-2 p-4 rounded-lg shadow-lg shadow-slate-800 bg-slate-600 ">
         <div className="flex flex-row items-center gap-2 shrink-0">
             <div className="w-auto h-auto">
@@ -84,4 +111,4 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
         </div>
         <div className="break-all">{noteMarkup}</div>
     </div>)
-} 
+}
