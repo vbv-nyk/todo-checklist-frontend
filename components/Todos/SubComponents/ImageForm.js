@@ -20,6 +20,9 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
                         if (e.target.value && checkIfImageExists(e.target.value)) {
                             setImageURL(e.target.value);
                             setImageExists(true);
+                        } else if (!e.target.value) {
+                            setImageURL("https://cdn.iconscout.com/icon/premium/png-512-thumb/todo-list-1540192-1305387.png?f=avif&w=256")
+                            setImageURL(iconURL);
                         } else {
                             setImageURL("https://cdn.iconscout.com/icon/premium/png-512-thumb/todo-list-1540192-1305387.png?f=avif&w=256")
                             setImageExists(false);

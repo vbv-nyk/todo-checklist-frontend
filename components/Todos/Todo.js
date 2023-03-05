@@ -72,7 +72,7 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
     if (editing) {
         if (iconForm)
             return (<form onSubmit={(e) => e.preventDefault()} className="flex flex-col w-full gap-2 p-4 text-sm rounded-2xl h-fit bg-slate-800 bottom-5">
-                <Image src={imageSrc} alt={"Image Url"} height={5} width={20} className="h-5 hover:cursor-pointer " onClick={() => setIconForm(n => !n)} />
+                <Image src={imageSrc} alt={"Image Url"} height={10} width={22} className="w-20 h-20 hover:cursor-pointer" onClick={() => setIconForm(n => !n)} />
 
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-col">
@@ -110,7 +110,7 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
                     <div className="flex flex-row flex-wrap items-center gap-2 shrink-0">
                         <div className="w-full h-full">
                             <div className="flex flex-row">
-                                <Image src={iconURL} alt={"Image Url"} height={5} width={20} className="w-10 h-10 hover:cursor-pointer bg-slate-600" onClick={() => setIconForm(n => !n)} />
+                                <Image src={iconURL} alt={"Image Url"} height={5} width={20} className="w-10 h-10 p-2 hover:cursor-pointer bg-slate-600" onClick={() => setIconForm(n => !n)} />
                             </div>
                         </div>
                         <div className="flex flex-col gap-1">
