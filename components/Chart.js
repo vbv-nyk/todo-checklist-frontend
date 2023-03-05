@@ -2,6 +2,8 @@ import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 
 const TodoCalendar = ({ todos }) => {
+
+    const today = new Date();
     // Create a new Map to store the todo counts for each day
     const todoCounts = new Map();
 

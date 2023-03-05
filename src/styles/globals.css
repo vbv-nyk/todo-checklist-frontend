@@ -25,6 +25,14 @@ body {
  * The github and gitlab color scales are provided for reference.
  */
 
+.react-calendar-heatmap {
+    margin-right: auto;
+}
+
+.react-calendar-heatmap::before {
+    content: "Your Stats";
+}
+
 .react-calendar-heatmap text {
     font-size: 5px;
     fill: #aaa;
