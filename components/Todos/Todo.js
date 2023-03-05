@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import checkIfImageExists from "../../HelperFunctions/CheckImage";
 import ImageForm from "./SubComponents/ImageForm";
 import { validateURL } from "./SubComponents/TitleForm";
+import Draggable, { DraggableCore } from 'react-draggable'; // Both at the same time
 import TodoOptions from "./SubComponents/TodoOptions";
 
 export default function Todo({ title, note, link, iconURL, id, done }) {
@@ -109,7 +110,7 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
                     <div className="flex flex-row flex-wrap items-center gap-2 shrink-0">
                         <div className="w-full h-full">
                             <div className="flex flex-row">
-                                <Image src={iconURL} alt={"Image Url"} height={5} width={20} className="h-5 hover:cursor-pointer " onClick={() => setIconForm(n => !n)} />
+                                <Image src={iconURL} alt={"Image Url"} height={5} width={20} className="w-10 h-10 hover:cursor-pointer bg-slate-600" onClick={() => setIconForm(n => !n)} />
                             </div>
                         </div>
                         <div className="flex flex-col gap-1">
@@ -126,18 +127,20 @@ export default function Todo({ title, note, link, iconURL, id, done }) {
         )
 
     }
-    return (<div className="flex flex-col items-start justify-start gap-2 p-4 rounded-lg shadow-lg shadow-slate-800 bg-slate-600 ">
-        <div className="flex flex-row items-center gap-2 shrink-0">
-            <div className="w-auto h-auto">
-                <Image src={iconURL} alt={"Image Url"} height={5} width={20} />
-            </div>
-            {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
-            {!done && <div>
-                <TodoOptions id={id} setEditing={setEditing} />
+    return (
+        <div className="flex flex-col items-start justify-start w-full gap-2 p-4 rounded-lg shadow-lg shadow-slate-800 bg-slate-600 ">
+            <div className="flex flex-row items-center justify-between w-full gap-2 shrink-0">
+                <div className="flex flex-row items-center w-auto h-auto gap-1">
+                    <Image src={iconURL} className="h-5" alt={"Image Url"} height={5} width={20} />
+                    {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
+                </div>
+                {!done && <div>
+                    <TodoOptions id={id} setEditing={setEditing} />
 
-            </div>}
-            {done && <div className="text-green-400">Done</div>}
+                </div>}
+                {done && <div className="text-green-400">Done</div>}
+            </div>
+            <div className="break-all">{noteMarkup}</div>
         </div>
-        <div className="break-all">{noteMarkup}</div>
-    </div>)
+    )
 }
