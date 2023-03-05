@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import ImageForm from "./SubComponents/ImageForm";
 import TodoOptions from "./SubComponents/TodoOptions";
 
-export default function Todo({ title, note, link, iconURL, id }) {
+export default function Todo({ title, note, link, iconURL, id, done }) {
     const URL = "http://192.168.0.103:3000"
     const [editing, setEditing] = useState(false);
     const titleRef = useRef(null);
@@ -28,7 +28,6 @@ export default function Todo({ title, note, link, iconURL, id }) {
     }
 
     if (editing) {
-
         return (
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col justify-center gap-2 p-5 rounded-xl bg-slate-800">
                 <div>
@@ -58,9 +57,9 @@ export default function Todo({ title, note, link, iconURL, id }) {
                 <Image src={iconURL} alt={"Image Url"} height={5} width={20} />
             </div>
             {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold text-lg"}>{title}</a> : <div className="text-lg font-semibold">{title}</div>}
-            <div>
+            {!done && <div>
                 <TodoOptions id={id} setEditing={setEditing} />
-            </div>
+            </div>}
         </div>
         <div className="break-all">{note}</div>
     </div>)

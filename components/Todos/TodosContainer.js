@@ -32,6 +32,7 @@ export default function TodosContainer() {
                     note={todo.note}
                     iconURL={todo.iconURL}
                     link={todo.link}
+                    done={todo.done}
                 />
             );
         });
