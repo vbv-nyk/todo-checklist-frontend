@@ -21,8 +21,8 @@ export default function TodosContainer() {
     if (!todosData) {
         return <div>Loading Your Todos</div>
     }
+
     const Todos = todosData
-        .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
         .map(todo => {
             return (
                 <Todo
@@ -40,9 +40,10 @@ export default function TodosContainer() {
     return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl">
         <div className="flex flex-col justify-start max-h-96">
             <div className="p-2 text-xl font-bold">Overall Stats</div>
-            <TodoCalendar todos={todosData} />
         </div>
-        <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo} />
+        <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
+            setTodosData={setTodosData}
+            todosData={todosData} />
         <div className="flex flex-col gap-2">
             {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} />)}
             <>
