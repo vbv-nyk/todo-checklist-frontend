@@ -31,7 +31,7 @@ const TodoCalendar = ({ todos }) => {
     return (
         <CalendarHeatmap
             startDate={new Date('2023-01-01')} // Start date of the calendar
-            endDate={new Date('2023-06-01')} // End date of the calendar (defaults to current date)
+            endDate={new Date('2023-04-01')} // End date of the calendar (defaults to current date)
             values={data} // Array of objects with `date` and `count` properties
             classForValue={value => {
                 if (!value) {

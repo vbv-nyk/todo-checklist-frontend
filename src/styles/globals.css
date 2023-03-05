@@ -27,6 +27,7 @@ body {
 
 .react-calendar-heatmap {
     margin-right: auto;
+    margin-bottom: -80px;
 }
 
 .react-calendar-heatmap::before {
