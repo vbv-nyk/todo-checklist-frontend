@@ -3,9 +3,7 @@ import * as d3 from "d3";
 import { data } from 'autoprefixer';
 
 const TodoCalendar = ({ todos }) => {
-    const [showDetails, setShowDetails] = useState(false);
-    const [showData, setShowData] = useState("");
-    const [calendar, setCalendar] = useState(true);
+    const [showData, setShowData] = useState(`Select any day to view more details`);
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     const createCalendar = useMemo(() => {
@@ -16,8 +14,6 @@ const TodoCalendar = ({ todos }) => {
         const height = 200;
 
         const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-        const monthNames = ["January", "Feb"]
 
         const dateStart = new Date('2023-03-01');
         const dateEnd = new Date('2023-03-31');
@@ -34,7 +30,6 @@ const TodoCalendar = ({ todos }) => {
             .paddingInner(0.2)
             .paddingOuter(0.2)
 
-        console.log(d3.timeMonday(dateStart));
         const y = d3.scaleBand()
             .domain(d3.timeWeeks(d3.timeSunday(dateStart), dateEnd))
             .range([0, height])
@@ -56,7 +51,6 @@ const TodoCalendar = ({ todos }) => {
                 return new Date(d).getDate() === new Date(todo.date).getDate() && new Date(d).getMonth() === new Date(todo.date).getMonth() && new Date(d).getFullYear() === new Date(todo.date).getFullYear();
             });
             const count = matchingTodo.length;
-            console.log(matchingTodo, d);
             currentSquare.style.stroke = "black";
             currentSquare.style.strokeWidth = "3";
 
@@ -70,11 +64,24 @@ const TodoCalendar = ({ todos }) => {
             setShowData(`Select any day to view more details`);
 
         }
+
         rects.enter()
             .append("rect")
             .attr("width", x.bandwidth)
             .attr("height", y.bandwidth)
-            .attr("fill", "lightgrey")
+            .attr("fill", (d, i, n) => {
+                const matchingTodo = todos.filter(todo => {
+                    return new Date(d).getDate() === new Date(todo.date).getDate() && new Date(d).getMonth() === new Date(todo.date).getMonth() && new Date(d).getFullYear() === new Date(todo.date).getFullYear();
+                }).length;
+                if (matchingTodo === 0)
+                    return "lightgrey"
+                if (matchingTodo === 1)
+                    return "#90EE90"
+                if (matchingTodo === 2)
+                    return "#32CD32"
+                else
+                    return "#2E8B57"
+            })
             .attr("x", (d, i, n) => {
                 return x(dayNames[d3.timeDay(d) % 7]);
             })
@@ -106,11 +113,11 @@ const TodoCalendar = ({ todos }) => {
 
 
     return (
-        <div className='flex flex-row flex-wrap items-center justify-center p-2 mx-auto calendar-container bg-slate-900 rounded-2xl'>
+        <div className='flex flex-row flex-wrap items-center justify-center gap-4 p-2 py-10 mx-auto bg-slate-600 calendar-container rounded-2xl'>
             <svg viewBox='0 0 350 280' className='ml-auto' >
                 <div>{createCalendar}</div>
             </svg>
-            <div className='p-3 mx-auto text-lg font-bold border w-80 bg-slate-800 rounded-2xl'>{showData}</div>
+            <div className='p-3 mx-auto font-bold text-center border text-md w-60 bg-slate-600 rounded-2xl'>{showData}</div>
         </div>)
 };
 
