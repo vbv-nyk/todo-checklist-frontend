@@ -1,13 +1,15 @@
-import React, { use, useMemo, useState } from 'react';
+import React, { use, useEffect, useMemo, useRef, useState } from 'react';
 import * as d3 from "d3";
 import { data } from 'autoprefixer';
+import { URL } from '@/pages/api/global';
 
-const TodoCalendar = ({ todos }) => {
+const TodoCalendar = ({ todos, setTodosData }) => {
     const [showData, setShowData] = useState(`Select any day to view more details`);
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    const svgRef = useRef(null);
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const createCalendar = useMemo(() => {
-
         d3.selectAll("g").remove();
 
         const width = 300;
@@ -108,14 +110,12 @@ const TodoCalendar = ({ todos }) => {
             .attr("transform", "rotate(-40)")
             .attr("text-anchor", "end")
             .attr("font-size", "large");
-
     }, [todos]);
 
 
     return (
         <div className='flex flex-row flex-wrap items-center justify-center gap-4 p-2 py-10 mx-auto bg-slate-600 calendar-container rounded-2xl'>
             <svg viewBox='0 0 350 280' className='ml-auto' >
-                <div>{createCalendar}</div>
             </svg>
             <div className='p-3 mx-auto font-bold text-center border text-md w-60 bg-slate-600 rounded-2xl'>{showData}</div>
         </div>)
