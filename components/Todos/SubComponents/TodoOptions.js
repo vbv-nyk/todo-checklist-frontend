@@ -30,7 +30,7 @@ export default function TodoOptions({ id, setEditing, todosData, setTodosData, d
         setTodosData(todos);
     }
     return (
-        <div className="flex flex-row items-start justify-center gap-2 text-sm font-bold">
+        <div className="flex flex-row justify-center gap-2 my-auto text-sm font-bold">
             {!done && <>
                 <button alt="" className="px-3 py-1 bg-green-600 cursor-pointer" onClick={() => todoMarkDone()}>Done</button>
                 <button alt="" className="px-3 py-1 bg-blue-600 cursor-pointer" onClick={() => setEditing(true)} >Edit</button>
