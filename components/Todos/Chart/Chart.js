@@ -6,6 +6,8 @@ const TodoCalendar = ({ todos }) => {
     const [showDetails, setShowDetails] = useState(false);
     const [showData, setShowData] = useState("");
     const [calendar, setCalendar] = useState(true);
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
     const createCalendar = useMemo(() => {
 
         d3.selectAll("g").remove();
@@ -14,6 +16,8 @@ const TodoCalendar = ({ todos }) => {
         const height = 200;
 
         const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        const monthNames = ["January", "Feb"]
 
         const dateStart = new Date('2023-03-01');
         const dateEnd = new Date('2023-03-31');
@@ -42,7 +46,7 @@ const TodoCalendar = ({ todos }) => {
 
         const rects = g.selectAll("rect")
             .data(days)
-            .attr("fill", "green")
+            .attr("fill", "white")
             .attr("y", (d, i, n) => {
                 return d3.timeWeek(d);
             });;
@@ -56,21 +60,21 @@ const TodoCalendar = ({ todos }) => {
             currentSquare.style.stroke = "black";
             currentSquare.style.strokeWidth = "3";
 
-            setShowDetails(true);
-            setShowData(`${count} todos done ${d}`);
+            setShowData(`${count} todos on ${d.getDate()}th of ${months[d.getMonth()]} ${d.getFullYear()}`);
         }
 
         function removeTitles(e, d, currentSquare) {
             currentSquare.style.stroke = "none";
             currentSquare.style.strokeWidth = "3";
 
-            setShowDetails(false);
+            setShowData(`Select any day to view more details`);
+
         }
         rects.enter()
             .append("rect")
             .attr("width", x.bandwidth)
             .attr("height", y.bandwidth)
-            .attr("fill", "green")
+            .attr("fill", "lightgrey")
             .attr("x", (d, i, n) => {
                 return x(dayNames[d3.timeDay(d) % 7]);
             })
@@ -102,11 +106,11 @@ const TodoCalendar = ({ todos }) => {
 
 
     return (
-        <div className='calendar-container'>
-            <svg viewBox='0 0 350 280'>
-                <div className='ml-auto'>{createCalendar}</div>
+        <div className='flex flex-row flex-wrap items-center justify-center p-2 mx-auto calendar-container bg-slate-900 rounded-2xl'>
+            <svg viewBox='0 0 350 280' className='ml-auto' >
+                <div>{createCalendar}</div>
             </svg>
-            <div className='mx-auto text-lg'>{showData}</div>
+            <div className='p-3 mx-auto text-lg font-bold border w-80 bg-slate-800 rounded-2xl'>{showData}</div>
         </div>)
 };
 
