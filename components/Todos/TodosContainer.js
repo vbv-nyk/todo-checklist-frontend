@@ -40,7 +40,7 @@ export default function TodosContainer() {
         });
 
     return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl">
-        <div className="flex flex-col justify-start max-h-96">
+        <div className="flex flex-col justify-start">
             <div className="p-2 text-xl font-bold">Overall Stats</div>
             <TodoCalendar todos={todosData} />
         </div>

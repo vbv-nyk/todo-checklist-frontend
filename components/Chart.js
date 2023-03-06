@@ -9,7 +9,6 @@ const TodoCalendar = ({ todos }) => {
         const height = 200;
 
         const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let freqOfDays = {};
 
         const dateStart = new Date('2023-01-01');
         const dateEnd = new Date('2023-01-31');
@@ -18,7 +17,7 @@ const TodoCalendar = ({ todos }) => {
 
         const svg = d3.select("svg")
             .attr("width", width)
-            .attr("height", height + 50);
+            .attr("height", height);
 
         const x = d3.scaleBand()
             .domain(dayNames)
@@ -32,19 +31,8 @@ const TodoCalendar = ({ todos }) => {
             .paddingInner(0.2)
             .paddingOuter(0.2)
 
-        const result = todos.forEach(todo => {
-            const newDate = new Date(todo.date);
-            const longString = `${newDate.getFullYear()} ${newDate.getMonth()} ${newDate.getDay()}`;
-            if (freqOfDays[longString]) {
-                freqOfDays[longString]++;
-            } else {
-                freqOfDays[longString] = 1;
-            }
-        });
 
-        const g = svg.append("g")
-            .attr("class", "rect-container")
-            .attr("transform", "translate(0,0)");
+        const g = svg.append("g");
 
         const rects = g.selectAll("rect")
             .data(days)
@@ -68,21 +56,22 @@ const TodoCalendar = ({ todos }) => {
         const xScale = d3.axisBottom(x);
 
 
-        const xAxis = svg.append("g").
+        const xAxis = g.append("g").
             attr("transform", `translate(0,${height})`);
 
         xAxis.call(xScale);
 
+
         xAxis.selectAll("text")
             .attr("transform", "rotate(-40)")
-            .attr("text-anchor", "end");
-
+            .attr("text-anchor", "end")
+            .attr("font-size", "large");
 
     }
 
     return (
-        <div className='w-full h-full'>
-            <svg className='w-full group-container'>
+        <div className='calendar-container'>
+            <svg viewBox='0 0 350 280'>
                 {
                     createCalendar()
                 }
