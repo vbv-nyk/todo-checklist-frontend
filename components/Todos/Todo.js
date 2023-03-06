@@ -103,7 +103,7 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
             </form>)
 
         return (
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col justify-center gap-2 p-5 rounded-xl bg-slate-800">
+            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col justify-center w-full gap-2 p-5 rounded-xl bg-slate-800">
                 <div>
                     <div className="flex flex-row flex-wrap items-center gap-2 shrink-0">
                         <div className="w-full h-full">
