@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 import checkIfImageExists from "../../../HelperFunctions/CheckImage";
 
@@ -10,7 +11,7 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
             <div className="flex flex-col items-center gap-2">
                 <div className="text-sm">Image Preview</div>
                 <div className="w-auto h-auto p-5 bg-slate-700 ">
-                    <img src={imageURL} alt={""} width={80} height={80} />
+                    <Image src={imageURL} alt={""} width={80} height={80} />
                 </div>
             </div>
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">

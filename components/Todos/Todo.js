@@ -127,7 +127,7 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
     }
     return (
         <div className="flex flex-col items-start justify-start w-full gap-2 p-4 rounded-lg shadow-lg shadow-slate-800 bg-slate-600 ">
-            <div className="flex flex-row content-center content-end justify-between w-full gap-2 shrink-0">
+            <div className="flex flex-row content-center justify-between w-full gap-2 shrink-0">
                 <div className="flex flex-row items-center w-auto h-auto gap-1">
                     <Image src={iconURL} className="h-5" alt={"Image Url"} height={5} width={20} />
                     {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold5 text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
