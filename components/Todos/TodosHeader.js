@@ -3,10 +3,10 @@ import { Dropdown } from "flowbite-react";
 import { Tooltip } from 'react-tooltip'
 import { useState } from 'react';
 import Todo from './Todo';
+import { URL } from '@/pages/api/global';
 
 export function TodosHeader({ showAddTodo, setShowAddTodo, todosData, setTodosData }) {
     const [dropdown, setDropdown] = useState(false);
-    const URL = "http://localhost:3000"
 
 
     async function sortAscending() {
@@ -50,7 +50,7 @@ export function TodosHeader({ showAddTodo, setShowAddTodo, todosData, setTodosDa
         setDropdown(false);
     }
 
-    return (<div className="flex items-center justify-between p-4 mt-12">
+    return (<div className="flex items-center justify-between p-4">
         <div className="mb-2 text-xl font-bold text-white">Your Todos</div>
         <div className="flex items-center gap-2 mb-2 font-bold">
             {!showAddTodo && <button className="px-3 py-2 mb-2 rounded-sm bg-slate-600" onClick={(e) => setShowAddTodo(n => !n)}>Add</button>}

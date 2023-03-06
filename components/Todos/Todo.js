@@ -1,3 +1,4 @@
+import { URL } from "@/pages/api/global";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import checkIfImageExists from "../../HelperFunctions/CheckImage";
@@ -5,8 +6,6 @@ import { validateURL } from "./SubComponents/TitleForm";
 import TodoOptions from "./SubComponents/TodoOptions";
 
 export default function Todo({ title, note, link, iconURL, id, done, todosData, setTodosData }) {
-    const URL = "http://localhost:3000"
-
     const [iconForm, setIconForm] = useState(false);
     const [editing, setEditing] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);

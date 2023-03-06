@@ -1,3 +1,4 @@
+import { URL } from "@/pages/api/global";
 import { json } from "d3";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -12,8 +13,6 @@ export function validateURL(url) {
 }
 
 export default function TitleForm({ imageURL, setShowAddTodo, todosData, setTodosData }) {
-    const URL = "http://localhost:3000"
-
     const titleRef = useRef(null);
     const linkRef = useRef(null);
     const noteRef = useRef(null);

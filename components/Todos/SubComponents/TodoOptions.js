@@ -1,8 +1,8 @@
+import { URL } from "@/pages/api/global";
 import Image from "next/image";
 
 export default function TodoOptions({ id, setEditing, todosData, setTodosData, done }) {
     const height = 16, width = 18;
-    const URL = "http://localhost:3000"
 
     async function todoMarkDone() {
         const res = await (await fetch(`${URL}/Todos/${id}`, {
