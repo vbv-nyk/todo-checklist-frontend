@@ -1,7 +1,7 @@
-import TodoCalendar from "../../components/Chart";
-import TodoHeatmap from "../../components/Chart";
-import Chart from "../../components/Chart";
-import Navbar from "../../components/Navbar";
+import TodoCalendar from "../../components/Todos/Chart/Chart";
+import TodoHeatmap from "../../components/Todos/Chart/Chart";
+import Chart from "../../components/Todos/Chart/Chart";
+import Navbar from "../../components/Navbar/Navbar";
 import Todo from "../../components/Todos/Todo";
 import TodosContainer from "../../components/Todos/TodosContainer";
 

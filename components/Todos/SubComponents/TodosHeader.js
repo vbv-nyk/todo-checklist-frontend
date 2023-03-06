@@ -2,7 +2,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 import { Dropdown } from "flowbite-react";
 import { Tooltip } from 'react-tooltip'
 import { useState } from 'react';
-import Todo from './Todo';
+import Todo from '../Todo';
 import { URL } from '@/pages/api/global';
 
 export function TodosHeader({ showAddTodo, setShowAddTodo, todosData, setTodosData }) {

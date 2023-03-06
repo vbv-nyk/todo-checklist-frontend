@@ -1,9 +1,9 @@
 import { URL } from "@/pages/api/global";
 import { useEffect, useState } from "react";
-import TodoCalendar from "../Chart";
+import TodoCalendar from "./Chart/Chart";
 import AddTodo from "./AddTodos";
 import Todo from "./Todo";
-import { TodosHeader } from "./TodosHeader";
+import { TodosHeader } from "./SubComponents/TodosHeader";
 
 export default function TodosContainer() {
     const [todosData, setTodosData] = useState(null);
