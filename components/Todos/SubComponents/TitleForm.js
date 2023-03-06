@@ -12,7 +12,8 @@ export function validateURL(url) {
 }
 
 export default function TitleForm({ imageURL, setShowAddTodo, todosData, setTodosData }) {
-    const URL = "http://192.168.103:3000";
+    const URL = "http://localhost:3000"
+
     const titleRef = useRef(null);
     const linkRef = useRef(null);
     const noteRef = useRef(null);
@@ -78,7 +79,7 @@ export default function TitleForm({ imageURL, setShowAddTodo, todosData, setTodo
                     <div className="flex flex-col col-start-1 col-end-2 gap-1">
                         <label htmlFor="title" className="text-xs">Title For Todo *</label>
                         <input onFocus={(e) => e.target
-                            .style = noError.border} style={noError} id="title" ref={titleRef} className="p-2 bg-slate-500" />
+                            .style = noError.border} style={noError} id="title" ref={titleRef} className="p-2 bg-slate-600" />
                         {/* <div>This is a required field</div> */}
 
                     </div>
@@ -88,12 +89,12 @@ export default function TitleForm({ imageURL, setShowAddTodo, todosData, setTodo
                             e.target.style = noError.border
                             setInvalidLink(false);
                         }}
-                            style={noError} id="link" ref={linkRef} className="p-2 bg-slate-500" />
+                            style={noError} id="link" ref={linkRef} className="p-2 bg-slate-600" />
                     </div>
                     <div className="flex flex-col gap-1">
                         <label htmlFor="notes" className="text-xs">Add Notes *</label>
                         <textarea onFocus={(e) => e.target
-                            .style = noError.border} style={noError} id="notes" ref={noteRef} className="flex-grow w-full p-2 resize-none bg-slate-500" />
+                            .style = noError.border} style={noError} id="notes" ref={noteRef} className="flex-grow w-full p-2 resize-none bg-slate-600" />
                     </div>
                 </div>
             </div>

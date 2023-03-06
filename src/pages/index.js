@@ -1,3 +1,4 @@
+import TodoCalendar from "../../components/Chart";
 import TodoHeatmap from "../../components/Chart";
 import Chart from "../../components/Chart";
 import Navbar from "../../components/Navbar";

@@ -16,7 +16,7 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
                 <label className="text-xs">Enter Image URL {!imageExists && <span className="p-2 italic text-red-400">(Image does not exist)</span>}</label>
                 <div className="flex flex-row items-center gap-2 text-sm">
-                    <input className="p-2 bg-slate-500" type={"text"} placeholder={"Leave blank for default"} onChange={((e) => {
+                    <input className="p-2 bg-slate-600" type={"text"} placeholder={"Leave blank for default"} onChange={((e) => {
                         if (e.target.value && checkIfImageExists(e.target.value)) {
                             setImageURL(e.target.value);
                             setImageExists(true);

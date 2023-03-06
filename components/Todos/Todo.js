@@ -1,13 +1,12 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import checkIfImageExists from "../../HelperFunctions/CheckImage";
-import ImageForm from "./SubComponents/ImageForm";
 import { validateURL } from "./SubComponents/TitleForm";
-import Draggable, { DraggableCore } from 'react-draggable'; // Both at the same time
 import TodoOptions from "./SubComponents/TodoOptions";
 
 export default function Todo({ title, note, link, iconURL, id, done, todosData, setTodosData }) {
-    const URL = "http://192.168.0.103:3000"
+    const URL = "http://localhost:3000"
+
     const [iconForm, setIconForm] = useState(false);
     const [editing, setEditing] = useState(false);
     const [invalidLink, setInvalidLink] = useState(false);
@@ -95,7 +94,7 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
                         ref={linkRef} onFocus={(e) => {
                             setInvalidLink(false)
                             e.target.style = noError.border
-                        }} className="w-full p-1 bg-slate-500"
+                        }} className="w-full p-1 bg-slate-600"
                         placeholder="" />
                 </div>
                 <div className="flex flex-row gap-2">
@@ -132,13 +131,12 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
             <div className="flex flex-row items-center justify-between w-full gap-2 shrink-0">
                 <div className="flex flex-row items-center w-auto h-auto gap-1">
                     <Image src={iconURL} className="h-5" alt={"Image Url"} height={5} width={20} />
-                    {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
+                    {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold5 text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
                 </div>
-                {!done && <div>
-                    <TodoOptions id={id} setEditing={setEditing} todosData={todosData} setTodosData={setTodosData} />
-
-                </div>}
-                {done && <div className="text-green-400">Done</div>}
+                <div className="flex flex-row gap-3">
+                    {done && <div className="text-green-400">Done</div>}
+                    <TodoOptions id={id} setEditing={setEditing} todosData={todosData} setTodosData={setTodosData} done={done} />
+                </div>
             </div>
             <div className="break-all">{noteMarkup}</div>
         </div>

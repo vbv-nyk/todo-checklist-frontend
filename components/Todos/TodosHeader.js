@@ -6,7 +6,7 @@ import Todo from './Todo';
 
 export function TodosHeader({ showAddTodo, setShowAddTodo, todosData, setTodosData }) {
     const [dropdown, setDropdown] = useState(false);
-    const URL = "http://192.168.0.103:3000";
+    const URL = "http://localhost:3000"
 
 
     async function sortAscending() {

@@ -5,7 +5,7 @@ import Todo from "./Todo";
 import { TodosHeader } from "./TodosHeader";
 
 export default function TodosContainer() {
-    const URL = "http://192.168.0.103:3000"
+    const URL = "http://localhost:3000"
     const [todosData, setTodosData] = useState(null);
     const [showAddTodo, setShowAddTodo] = useState(false);
 
@@ -14,6 +14,7 @@ export default function TodosContainer() {
         console.log(todos);
         setTodosData(todos);
     };
+
     useEffect(() => {
         fetchData();
     }, [])
@@ -43,6 +44,7 @@ export default function TodosContainer() {
         <div className="flex flex-col justify-start max-h-96">
             <div className="p-2 text-xl font-bold">Overall Stats</div>
         </div>
+        <TodoCalendar todos={todosData} />
         <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
             setTodosData={setTodosData}
             todosData={todosData} />
