@@ -3,11 +3,11 @@ import * as d3 from "d3";
 import { data } from 'autoprefixer';
 import { URL } from '@/pages/api/global';
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const TodoCalendar = ({ todos, setTodosData }) => {
     const [showData, setShowData] = useState(`Select any day to view more details`);
 
     const svgRef = useRef(null);
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const createCalendar = () => {
         d3.selectAll("g").remove();
@@ -117,10 +117,13 @@ const TodoCalendar = ({ todos, setTodosData }) => {
 
 
     return (
-        <div className='flex flex-col items-center justify-center gap-4 p-2 py-10 md:px-10 md:w-fit md:mx-auto md:flex-row bg-slate-800 calendar-container rounded-2xl'>
+        <div className='flex flex-col items-center justify-center gap-4 p-2 py-10 md:px-10 md:w-fit md:mx-auto bg-slate-800 calendar-container rounded-2xl '>
+            <div className='text-lg font-bold text-center'>
+                {months[new Date().getMonth()]}
+            </div>
             <svg viewBox='0 0 350 280' ref={createCalendar} >
             </svg>
-            <div className='px-3 py-4 font-bold w-60 bg-slate-700 rounded-2xl'>{showData}</div>
+            <div className='w-full px-3 py-4 font-bold text-center bg-slate-700 rounded-2xl'>{showData}</div>
         </div>)
 };
 
