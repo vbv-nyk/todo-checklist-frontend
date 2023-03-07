@@ -95,8 +95,9 @@ const TodoCalendar = ({ todos, setTodosData }) => {
             })
             .on("mouseout", function (e, d) {
                 removeTitles(e, d, this);
-            }).on("click", function (e, d) { dislpayDetails(e, d, this) })
-
+            })
+            .on("enter", function (e, d) { dislpayDetails(e, d, this) })
+            .on("exit", function (e, d) { removeTitles(e, d, this) })
 
         const xScale = d3.axisBottom(x);
 
