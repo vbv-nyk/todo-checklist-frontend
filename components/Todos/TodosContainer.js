@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import TodoCalendar from "./Chart/Chart";
 import AddTodo from "./AddTodos";
 import Todo from "./Todo";
+import Draggable, { DraggableCore } from "react-draggable";
 import { TodosHeader } from "./SubComponents/TodosHeader";
 
 export default function TodosContainer() {
@@ -47,7 +48,7 @@ export default function TodosContainer() {
         <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
             setTodosData={setTodosData}
             todosData={todosData} />
-        <div className="flex flex-col gap-2">
+        <div className="relative flex flex-col gap-2 todo-container">
             {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} setTodosData={setTodosData}
                 todosData={todosData} />)}
             <>

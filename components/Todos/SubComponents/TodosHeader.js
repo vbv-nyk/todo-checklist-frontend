@@ -62,7 +62,7 @@ export function TodosHeader({ showAddTodo, setShowAddTodo, todosData, setTodosDa
                 }>Sort</button>
                 {dropdown && (
                     <div>
-                        <ul className='absolute p-2 right-10 rounded-2xl bg-slate-800'>
+                        <ul className='absolute z-10 p-2 right-10 rounded-2xl bg-slate-800'>
                             <li className='p-3 text-center border-b-2 hover:cursor-pointer' onClick={() => sortAscending()}>Ascending</li>
                             <li className='p-3 text-center border-b-2 hover:cursor-pointer' onClick={() => sortDescending()}>Descending</li>
                             <li className='p-3 text-center border-b-2 hover:cursor-pointer' onClick={() => showDone()}>Done</li>
