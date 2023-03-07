@@ -12,7 +12,7 @@ const TodoCalendar = ({ todos, setTodosData }) => {
     const createCalendar = () => {
         d3.selectAll("g").remove();
 
-        const width = 300;
+        const width = 350;
         const height = 200;
 
         const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -97,11 +97,13 @@ const TodoCalendar = ({ todos, setTodosData }) => {
                 removeTitles(e, d, this);
             }).on("click", function (e, d) { dislpayDetails(e, d, this) })
 
+
         const xScale = d3.axisBottom(x);
 
 
         const xAxis = g.append("g").
             attr("transform", `translate(0,${height})`);
+
 
         xAxis.call(xScale);
 
@@ -110,14 +112,15 @@ const TodoCalendar = ({ todos, setTodosData }) => {
             .attr("transform", "rotate(-40)")
             .attr("text-anchor", "end")
             .attr("font-size", "large");
+
     };
 
 
     return (
-        <div className='flex flex-row flex-wrap items-center justify-center gap-4 p-2 py-10 mx-auto bg-slate-600 calendar-container rounded-2xl'>
-            <svg viewBox='0 0 350 280' className='ml-auto' ref={createCalendar} >
+        <div className='flex flex-col items-center justify-center gap-4 p-2 py-10 md:px-10 md:w-fit md:mx-auto md:flex-row bg-slate-800 calendar-container rounded-2xl'>
+            <svg viewBox='0 0 350 280' ref={createCalendar} >
             </svg>
-            <div className='p-3 mx-auto font-bold text-center border text-md w-60 bg-slate-600 rounded-2xl'>{showData}</div>
+            <div className='px-3 py-4 font-bold w-60 bg-slate-700 rounded-2xl'>{showData}</div>
         </div>)
 };
 

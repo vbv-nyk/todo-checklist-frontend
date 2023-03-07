@@ -75,7 +75,7 @@ export default function TodosContainer() {
                 onDragEnd={(result) => onDragEnd(result)}>
                 <Droppable droppableId={"Unique ID"} key={"Unique ID"}>
                     {(provided, snapshot) => (
-                        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 " ref={provided.innerRef} {...provided.droppableProps}>
+                        <div className="grid grid-cols-1 gap-2 " ref={provided.innerRef} {...provided.droppableProps}>
                             {Todos}
                             {provided.placeholder}
                         </div>
