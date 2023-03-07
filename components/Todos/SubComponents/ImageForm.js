@@ -6,7 +6,7 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
     const [imageExists, setImageExists] = useState(true);
 
     return (
-        <div className="flex flex-col items-center justify-center gap-5 p-4 mx-auto text-sm rounded-lg bg-slate-800 w-fit">
+        <div className="flex flex-col items-center justify-center w-full gap-5 p-4 mx-auto text-sm rounded-lg bg-slate-800 md:w-fit">
             <div className="text-lg font-semibold">Step 1: Enter Todo Image</div>
             <div className="flex flex-col items-center gap-2">
                 <div className="text-sm">Image Preview</div>
@@ -17,7 +17,7 @@ export default function ImageForm({ imageURL, setImageURL, setPage }) {
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-2">
                 <label className="text-xs">Enter Image URL {!imageExists && <span className="p-2 italic text-red-400">(Image does not exist)</span>}</label>
                 <div className="flex flex-row items-center gap-2 text-sm">
-                    <input className="p-2 bg-slate-600" type={"text"} placeholder={"Leave blank for default"} onChange={((e) => {
+                    <input className="w-full p-2 text-sm bg-slate-600 md:w-fit" type={"text"} placeholder={"Leave blank for default"} onChange={((e) => {
                         if (e.target.value && checkIfImageExists(e.target.value)) {
                             setImageURL(e.target.value);
                             setImageExists(true);

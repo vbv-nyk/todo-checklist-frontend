@@ -65,7 +65,7 @@ export default function TitleForm({ imageURL, setShowAddTodo, todosData, setTodo
     }
 
     return (
-        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center justify-center gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 w-fit ">
+        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col items-center justify-center w-full gap-5 p-10 mx-auto text-sm rounded-lg bg-slate-800 md:w-fit ">
             <div>
                 <div className="text-lg font-bold text-center">Step 2: Enter Todo Details</div>
                 <div className="text-xs"><i>Fields marked with * are mandatory</i></div>
