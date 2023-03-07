@@ -24,9 +24,10 @@ export default function TodosContainer() {
     }
 
     const Todos = todosData
-        .map(todo => {
+        .map((todo, index) => {
             return (
                 <Todo
+                    index={index}
                     key={todo._id}
                     id={todo._id}
                     title={todo.title}
@@ -40,7 +41,7 @@ export default function TodosContainer() {
             );
         });
 
-    return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl">
+    return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl ">
         <div className="flex flex-col justify-start">
             <div className="p-2 text-xl font-bold">Overall Stats</div>
             <TodoCalendar todos={todosData} setTodosData={setTodosData} />
@@ -48,12 +49,12 @@ export default function TodosContainer() {
         <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
             setTodosData={setTodosData}
             todosData={todosData} />
-        <div className="relative flex flex-col gap-2 todo-container">
+        <div >
             {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} setTodosData={setTodosData}
                 todosData={todosData} />)}
-            <>
+            <div className="relative grid grid-cols-1 gap-2 md:grid-cols-3 todo-container">
                 {Todos}
-            </>
+            </div>
         </div>
     </div>)
 }
