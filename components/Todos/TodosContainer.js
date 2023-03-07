@@ -65,7 +65,7 @@ export default function TodosContainer() {
             <div className="p-2 text-xl font-bold">Overall Stats</div>
             <TodoCalendar todos={todosData} setTodosData={setTodosData} />
         </div>
-        <div >
+        <div className="flex flex-col gap-4">
             <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
                 setTodosData={setTodosData}
                 todosData={todosData} />
