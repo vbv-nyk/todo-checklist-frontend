@@ -60,15 +60,15 @@ export default function TodosContainer() {
         const content = reorder(todosData, result.source.index, result.destination.index)
         setTodosData(content)
     }
-    return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl ">
-        <div className="flex flex-col justify-start">
+    return (<div className="flex flex-col gap-5 p-6 m-5 bg-slate-700 rounded-2xl ">
+        <div className="flex flex-col justify-start gap-5">
             <div className="p-2 text-xl font-bold">Overall Stats</div>
             <TodoCalendar todos={todosData} setTodosData={setTodosData} />
         </div>
-        <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
-            setTodosData={setTodosData}
-            todosData={todosData} />
         <div >
+            <TodosHeader setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo}
+                setTodosData={setTodosData}
+                todosData={todosData} />
             {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} setTodosData={setTodosData}
                 todosData={todosData} />)}
             <DragDropContext
