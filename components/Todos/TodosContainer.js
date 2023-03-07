@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import TodoCalendar from "./Chart/Chart";
 import AddTodo from "./AddTodos";
 import Todo from "./Todo";
-import Draggable, { DraggableCore } from "react-draggable";
 import { TodosHeader } from "./SubComponents/TodosHeader";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 export default function TodosContainer() {
     const [todosData, setTodosData] = useState(null);
@@ -20,15 +20,14 @@ export default function TodosContainer() {
     }, [])
 
     if (!todosData) {
-        return <div>Loading Your Todos</div>
+        return <div>Loading...</div>
     }
-
-    const Todos = todosData
-        .map((todo, index) => {
+    const Todos =
+        todosData.map((todo, index) => {
             return (
                 <Todo
-                    index={index}
                     key={todo._id}
+                    index={index}
                     id={todo._id}
                     title={todo.title}
                     note={todo.note}
@@ -39,8 +38,28 @@ export default function TodosContainer() {
                     setTodosData={setTodosData}
                 />
             );
-        });
+        })
 
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list)
+        const [removed] = result.splice(startIndex, 1)
+        result.splice(endIndex, 0, removed)
+        return result
+    }
+    function onDragEnd(result) {
+        const { destination, source, draggableId } = result;
+
+        if (!destination) {
+            return;
+        }
+
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index)
+            return;
+
+        const content = reorder(todosData, result.source.index, result.destination.index)
+        setTodosData(content)
+    }
     return (<div className="flex flex-col gap-1 p-6 m-5 bg-slate-700 rounded-2xl ">
         <div className="flex flex-col justify-start">
             <div className="p-2 text-xl font-bold">Overall Stats</div>
@@ -52,9 +71,17 @@ export default function TodosContainer() {
         <div >
             {showAddTodo && (<AddTodo setShowAddTodo={setShowAddTodo} setTodosData={setTodosData}
                 todosData={todosData} />)}
-            <div className="relative grid grid-cols-1 gap-2 md:grid-cols-3 todo-container">
-                {Todos}
-            </div>
+            <DragDropContext
+                onDragEnd={(result) => onDragEnd(result)}>
+                <Droppable droppableId={"Unique ID"} key={"Unique ID"}>
+                    {(provided, snapshot) => (
+                        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 " ref={provided.innerRef} {...provided.droppableProps}>
+                            {Todos}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
         </div>
-    </div>)
+    </div >)
 }

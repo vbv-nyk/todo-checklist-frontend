@@ -1,9 +1,9 @@
 import { URL } from "@/pages/api/global";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
 import checkIfImageExists from "../../HelperFunctions/CheckImage";
 import { validateURL } from "./SubComponents/TitleForm";
-import Draggable, { DraggableCore } from "react-draggable";
 import TodoOptions from "./SubComponents/TodoOptions";
 
 export default function Todo({ title, note, link, iconURL, id, done, todosData, setTodosData, index }) {
@@ -127,42 +127,23 @@ export default function Todo({ title, note, link, iconURL, id, done, todosData, 
 
     }
 
-    function swapElements(e, d) {
-        const changeInPos = Math.floor((d.y) / 100);
-        const newData = todosData.map(todo => todo);
-        console.log(newData);
-        let temp;
-        if (changeInPos === 0)
-            return;
-        if (changeInPos < 0) {
-            temp = newData[Math.max(index + changeInPos, 0)];
-            console.log(index + changeInPos, d.y, index);
-            newData[Math.max(index + changeInPos, 0)] = newData[index];
-            newData[index] = temp;
-        } else {
-            temp = newData[Math.min(index + changeInPos, newData.length - 1)];
-            console.log(index + changeInPos, d.y, index);
-            newData[Math.min(index + changeInPos, newData.length - 1)] = newData[index];
-            newData[index] = temp;
-        }
-        console.log(newData);
-        setTodosData(newData);
-    }
     return (
-        <Draggable axis="both" bounds={".todo-container"} onStop={(e, d) => swapElements(e, d)}>
-            <div className="flex flex-col items-start justify-start w-full gap-2 p-4 rounded-lg shadow-lg shadow-slate-800 bg-slate-600">
-                <div className="flex flex-row content-center justify-between w-full gap-2 shrink-0">
-                    <div className="flex flex-row items-center w-auto h-auto gap-1">
-                        <Image src={iconURL} className="h-5" alt={"Image Url"} height={5} width={20} />
-                        {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold5 text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
+        <Draggable key={id} draggableId={id} index={index}>
+            {(provided) => (
+                <div className="flex flex-col items-start justify-start w-full gap-2 p-4 rounded-lg shadow-lg shadow-slate-800 bg-slate-600"  {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+                    <div className="flex flex-row content-center justify-between w-full gap-2 shrink-0">
+                        <div className="flex flex-row items-center w-auto h-auto gap-1">
+                            <Image src={iconURL} className="h-5" alt={"Image Url"} height={5} width={20} />
+                            {link !== "" ? <a href={link} target={"_blank"} className={"font-semibold5 text-lg"}>{titleMarkup}</a> : <div className="text-lg font-semibold">{titleMarkup}</div>}
+                        </div>
+                    </div>
+                    <div className="break-all">{noteMarkup}</div>
+                    <div className="flex flex-row items-center justify-center gap-3">
+                        <TodoOptions id={id} setEditing={setEditing} todosData={todosData} setTodosData={setTodosData} done={done} />
+                        {done && <div className="text-green-400">Done</div>}
                     </div>
                 </div>
-                <div className="break-all">{noteMarkup}</div>
-                <div className="flex flex-row items-center justify-center gap-3">
-                    <TodoOptions id={id} setEditing={setEditing} todosData={todosData} setTodosData={setTodosData} done={done} />
-                    {done && <div className="text-green-400">Done</div>}
-                </div>
-            </div>
-        </Draggable >
+            )}
+        </Draggable>
     )
 }
